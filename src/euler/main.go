@@ -1,8 +1,7 @@
 package main
 
 import (
-	problems "euler/problems"
-	permute "euler/permute"
+	utils "euler/utils"
 	"fmt"
 	"math"
 	"math/big"
@@ -10,8 +9,8 @@ import (
 )
 
 func main() {
-	problems.Problem23()
-	fmt.Println(permute.Reverse("Hello World"))
+	//fmt.Printf("this is the number: %d", p27())
+	fmt.Println(p15())
 }
 
 func p23() {
@@ -148,4 +147,33 @@ func binarySearch(array []int, start, end int) int {
 		return binarySearch(array, start, mid)
 	}
 	return binarySearch(array, mid, end)
+}
+
+func p27() (biggest int) {
+	var largestN, biggestProduct int
+	for a := -999; a < 1000; a++ {
+		for b := -1000; b <= 1000; b++ {
+			var n int
+			for utils.IsPrime(int(math.Pow(float64(n), float64(2))) + (a * n) + b) {
+				n++
+			}
+			if n > largestN {
+				fmt.Println(largestN)
+				largestN = n
+				biggestProduct = a * b
+			}
+		}
+	}
+	return biggestProduct
+}
+
+func p15() (num int) {
+	const gridSize int = 20;
+	var paths int = 1;
+	 
+	for i := 0; i < gridSize; i++ {
+		paths *= (2 * gridSize) - i
+		paths /= i + 1
+	}
+	return paths
 }
